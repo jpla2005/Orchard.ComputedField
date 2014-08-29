@@ -1,0 +1,12 @@
+﻿Name: ComputedField
+AntiForgery: enabled
+Author: José Antonio Plá Rodríguez, Biasmey Morgado Guirola
+Website: https://github.com/jpla2005/Orchard.ComputedField
+Version: 1.0
+OrchardVersion: 1.0
+Description: A field type to allow using external data source for allowed values. It's very usefull when you have to get data from external database.
+Features:
+    ComputedField:
+        Description: Description for feature ComputedField.
+		Category: Fields
+		Dependencies: Orchard.jQuery, Common, Settings

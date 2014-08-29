@@ -1,0 +1,42 @@
+﻿@model Orchard.ComputedField.Settings.ComputedFieldSettings
+@{
+    Script.Require("jQuery");
+    var display = string.IsNullOrWhiteSpace(Model.SelectItem) ? "none" : "inline-block";
+}
+
+<fieldset>
+    <label for="@Html.FieldIdFor(m => m.Required)" class="forcheckbox">@T("Required")</label>
+    @Html.CheckBoxFor(m => m.Required)
+    <span class="hint">@T("Check to ensure the user enters a value in this field").</span>
+</fieldset>
+
+<fieldset>
+    <label for="add-empty" class="forcheckbox">@T("Add an empty element")</label>
+    <input type="checkbox" id="add-empty" @if(!string.IsNullOrWhiteSpace(Model.SelectItem)) {@Html.Raw("checked")} />
+    @Html.TextBoxFor(m => m.SelectItem, new { style = "display:" + display, @class = "empty-value" })
+    <span class="hint">@T("Check to add an extra empty element at top of select and specify the name").</span>
+</fieldset>
+
+<fieldset>
+    <label for="@Html.FieldIdFor(m => m.ServiceUrl)">@T("Service Url")</label>
+    @Html.TextBoxFor(m => m.ServiceUrl, new { @class = "text large" })
+    <span class="hint">@T("Url to values provider service. This can be an absolute url or relative one starting with ~/").</span>
+    @Html.ValidationMessageFor(m => m.ServiceUrl)
+</fieldset>
+
+@using (Script.Foot())
+{
+    <script type="text/javascript">
+        $(function () {
+            $("#add-empty").on("click", function () {
+                if (this.checked) {
+                    $("input.empty-value").show();
+                } else {
+                    $("input.empty-value").val("").hide();
+                }
+
+                //.toggle(function () { $(this).removeAttr("disabled"); }, function () { $(this).attr("disabled", ""); });
+            });
+        });
+    </script>
+}

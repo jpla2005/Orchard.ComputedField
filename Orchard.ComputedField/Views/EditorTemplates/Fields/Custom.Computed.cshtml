@@ -1,0 +1,12 @@
+﻿@model Orchard.ComputedField.ViewModels.ComputedFieldViewModel
+@{
+    Script.Require("jQuery");
+
+    var clazz = Model.Required ? "required" : string.Empty;
+}
+
+<fieldset>
+    <label for="@Html.FieldIdFor(m => Model.SelectedValue)" class="@clazz">@Model.Name</label>
+    @Html.DropDownListFor(m => m.SelectedValue, Model.GetList(), T("Select"))
+    <text>@Html.ValidationMessageFor(m => m.SelectedValue)</text>
+</fieldset>
